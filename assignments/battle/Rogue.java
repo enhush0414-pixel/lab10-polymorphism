@@ -1,11 +1,17 @@
+
 public class Rogue extends Character {
+    public Rogue(String name, int hp) {
+        super(name, hp);
+    }
 
-    // TODO: Constructor бичнэ үү
-    // public Rogue(String name, int hp)
-    // - super(name, hp) дуудна
+    @Override
+    public int attack(Character target) {
+        int damage = 25;
+        target.takeDamage(damage);
+        return damage;
+    }
 
-    // TODO: @Override attack(Character target) → int
-    // - 25 хохирол учруулна (critical hit!)
-    // - 25-г буцаана
-
+    public String describe() {
+        return "sneaks in shadow";
+    }
 }

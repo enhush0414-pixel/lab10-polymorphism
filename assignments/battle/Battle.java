@@ -1,22 +1,37 @@
+
+
 public class Battle {
+    public static int partyAttack(Character[] party, Character enemy) {
+        int totalDamage = 0;
+        for (Character member : party) {
+            if (member != null) {
+                totalDamage += member.attack(enemy);
+            }
+        }
+        return totalDamage;
+    }
 
-    // TODO: static int partyAttack(Character[] party, Character enemy)
-    // - party дахь Character бүрд attack(enemy) дуудна (polymorphic loop)
-    // - Нийт учруулсан хохирлын нийлбэрийг буцаана
-    // - Жишээ: Warrior(20) + Mage(15) + Rogue(25) = 60
+    public static String describeParty(Character[] party) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < party.length; i++) {
+            if (party[i] instanceof Warrior w) sb.append(w.describe());
+            else if (party[i] instanceof Mage m) sb.append(m.describe());
+            else if (party[i] instanceof Rogue r) sb.append(r.describe());
 
-    // ─────── 🟡 Stretch (30 оноо) ───────
+            if (i < party.length - 1) {
+                sb.append(" | ");
+            }
+        }
+        return sb.toString();
+    }
 
-    // TODO: static String describeParty(Character[] party)
-    // - Character бүрийн describe() method-ийг дуудаж, үр дүнг нэг String болгоно
-    // - Жишээ: "wields a sword | channels magic | sneaks in shadow"
-    // - Хооронд " | " тусгаарлагч ашиглана
-
-    // ─────── 🔴 Bonus (10 оноо) ───────
-
-    // TODO: static int countMages(Character[] party)
-    // - party дотор хэдэн Mage instance байгааг тоолно
-    // - instanceof pattern matching ашиглана (Java 16+):
-    //     if (c instanceof Mage m) { ... }
-
+    public static int countMages(Character[] party) {
+        int count = 0;
+        for (Character c : party) {
+            if (c instanceof Mage) {
+                count++;
+            }
+        }
+        return count;
+    }
 }
